@@ -5,4 +5,5 @@ package com.sumx4ever.common;
  */
 
 public class Common {
+
 }
