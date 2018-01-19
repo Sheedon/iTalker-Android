@@ -1,7 +1,9 @@
-package com.sumx4ever.italker;
+package com.sumx4ever.italker.activitys;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.sumx4ever.italker.R;
 
 public class MainActivity extends AppCompatActivity {
 
