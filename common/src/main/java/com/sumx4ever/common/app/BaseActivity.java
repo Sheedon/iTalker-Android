@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
  * @author xudongsun
  */
 
-public abstract class Activity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
 
     @Override
@@ -94,9 +94,9 @@ public abstract class Activity extends AppCompatActivity {
         if (fragments != null && fragments.size() > 0) {
             for (Fragment fragment : fragments) {
                 //判断是否为我们能过处理的Fragment类型
-                if (fragment instanceof com.sumx4ever.common.app.Fragment) {
+                if (fragment instanceof BaseFragment) {
                     //判断是否拦截了返回按钮
-                    if (((com.sumx4ever.common.app.Fragment) fragment).onBackPressed()) {
+                    if (((BaseFragment) fragment).onBackPressed()) {
                         //如果拦截 直接Return
                         return;
                     }
