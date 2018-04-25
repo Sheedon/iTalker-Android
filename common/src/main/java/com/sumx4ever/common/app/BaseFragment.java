@@ -14,7 +14,7 @@ import butterknife.Unbinder;
  * @author xudongsun
  */
 
-public abstract class Fragment extends android.support.v4.app.Fragment {
+public abstract class BaseFragment extends android.support.v4.app.Fragment {
 
     protected View mRoot;
     protected Unbinder mRootUnBinder;
