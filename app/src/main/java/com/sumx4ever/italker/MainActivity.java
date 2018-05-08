@@ -20,7 +20,7 @@ import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.sumx4ever.common.app.Activity;
+import com.sumx4ever.common.app.BaseActivity;
 import com.sumx4ever.common.widget.PortraitView;
 import com.sumx4ever.italker.frags.main.ActiveFragment;
 import com.sumx4ever.italker.frags.main.ContactFragment;
@@ -35,7 +35,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainActivity extends Activity
+public class MainActivity extends BaseActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener,
         NavHelper.OnTabChangedListener<Integer> {
 
@@ -120,7 +120,7 @@ public class MainActivity extends Activity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // 转接事件流到工具类中
-        return mNavHelper.preformClickMenu(item.getItemId());
+        return mNavHelper.performClickMenu(item.getItemId());
     }
 
     /**

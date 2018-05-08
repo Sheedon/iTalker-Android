@@ -6,10 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.sumx4ever.common.app.Fragment;
+import com.sumx4ever.common.app.BaseFragment;
 import com.sumx4ever.italker.R;
 
-public class GroupFragment extends Fragment {
+public class GroupFragment extends BaseFragment {
 
 
     public GroupFragment() {

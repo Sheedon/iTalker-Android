@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".frags.main.ActiveFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:text="Active"
+    <com.sumx4ever.common.widget.GalleyView
+        android:id="@+id/galleyView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/font_18"
-        android:textColor="@color/textPrimary"/>
+        android:padding="1dp" />
+
 
 </FrameLayout>

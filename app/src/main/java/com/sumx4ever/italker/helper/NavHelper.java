@@ -60,7 +60,7 @@ public class NavHelper<T> {
      * @param menuId 菜单的Id
      * @return 是否能够处理点击
      */
-    public boolean preformClickMenu(int menuId) {
+    public boolean performClickMenu(int menuId) {
         // 集合中寻找点击的菜单对应的Tab，如果有则进行处理
         Tab<T> tab = tabs.get(menuId);
         if (tab != null) {
