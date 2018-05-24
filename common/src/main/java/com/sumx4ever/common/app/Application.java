@@ -13,6 +13,7 @@ import java.io.File;
  * Created by xudongsun on 2018/1/18.
  */
 
+@SuppressWarnings("ResultOfMethodCallIgnored")
 public class Application extends android.app.Application {
 
     private static Application instance;

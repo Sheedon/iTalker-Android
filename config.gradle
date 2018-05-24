@@ -37,14 +37,15 @@ ext {
             convenientbanner       : "2.0.5",
             geniusVersion          : "2.0.0",
             circleimageview        : "2.1.0",
-            ucrop                  : "2.2.0-native",
+            ucrop                  : "2.2.2-native",
 
             //other
             butterknife            : "8.5.1",//8.8.1 有冲突
             eventBus               : "3.1.1",
             logger                 : "2.1.1",
             fragmentation          : "1.1.10",
-            easyPMVersion          : "0.3.0",
+            easyPMVersion          : "1.2.0",
+            ossVersion             : "+",
     ]
 
     dependencies = [
@@ -106,7 +107,7 @@ ext {
             //圆形图
             circleimageview        : "de.hdodenhof:circleimageview:${dependVersion.circleimageview}",
             //图片裁剪
-            ucrop                  : "com.yalantis:ucrop:${dependVersion.ucrop}",
+            ucrop                  : "com.github.yalantis:ucrop:${dependVersion.ucrop}",
 
             //other
             //butterknife
@@ -117,8 +118,10 @@ ext {
             //清晰的Log输出
             logger                 : "com.orhanobut:logger:${dependVersion.logger}",
             //权限申请
-            easypermissions                 : "pub.devrel:easypermissions:${dependVersion.easyPMVersion}",
-            kit_handler:"net.qiujuer.genius:kit-handler:${dependVersion.geniusVersion}",
+            easypermissions        : "pub.devrel:easypermissions:${dependVersion.easyPMVersion}",
+            kit_handler            : "net.qiujuer.genius:kit-handler:${dependVersion.geniusVersion}",
+            //阿里云OSS
+            aliyunOSS                    : "com.aliyun.dpa:oss-android-sdk:${dependVersion.ossVersion}"
     ]
 
 }

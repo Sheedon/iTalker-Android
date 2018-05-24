@@ -29,6 +29,7 @@ dependencies {
     implementation rootProject.ext.dependencies.design
     /**UI**/
     implementation rootProject.ext.dependencies.glide
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     annotationProcessor rootProject.ext.dependencies.glideCompiler
     implementation rootProject.ext.dependencies.geniusUi
     implementation rootProject.ext.dependencies.geniusRes

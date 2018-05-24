@@ -22,6 +22,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sumx4ever.common.app.BaseActivity;
 import com.sumx4ever.common.widget.PortraitView;
+import com.sumx4ever.italker.activitys.AccountActivity;
 import com.sumx4ever.italker.frags.main.ActiveFragment;
 import com.sumx4ever.italker.frags.main.ContactFragment;
 import com.sumx4ever.italker.frags.main.GroupFragment;
@@ -108,7 +109,7 @@ public class MainActivity extends BaseActivity
 
     @OnClick(R.id.btn_action)
     void onActionClick() {
-
+        AccountActivity.show(this);
     }
 
     /**
