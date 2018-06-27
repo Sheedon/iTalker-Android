@@ -10,7 +10,7 @@ import android.util.SparseArray;
  * 完成对Fragment的调度与重用问题
  * 达到最优的Fragment切换
  *
- * @author Sumx
+ * @author Sumx stuby of qiujuer's MVP
  * @createDate 2018/4/19
  */
 public class NavHelper<T> {

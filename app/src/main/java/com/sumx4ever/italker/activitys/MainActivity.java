@@ -1,6 +1,8 @@
-package com.sumx4ever.italker;
+package com.sumx4ever.italker.activitys;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,7 +24,10 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.sumx4ever.common.app.BaseActivity;
 import com.sumx4ever.common.widget.PortraitView;
+import com.sumx4ever.italker.R;
 import com.sumx4ever.italker.activitys.AccountActivity;
+import com.sumx4ever.italker.factory.persistence.Account;
+import com.sumx4ever.italker.frags.assist.PermissionsFragment;
 import com.sumx4ever.italker.frags.main.ActiveFragment;
 import com.sumx4ever.italker.frags.main.ContactFragment;
 import com.sumx4ever.italker.frags.main.GroupFragment;
@@ -60,6 +65,25 @@ public class MainActivity extends BaseActivity
 
     private NavHelper<Integer> mNavHelper;
 
+    /**
+     * MainActivity 显示的入口
+     * @param context
+     */
+    public static void show(Context context){
+        context.startActivity(new Intent(context,MainActivity.class));
+    }
+
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        if(Account.isComplete()) {
+            // 判断信息是否完全，完全则走正常流程
+            return super.initArgs(bundle);
+        }else{
+            UserActivity.show(this);
+            return false;
+        }
+    }
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
@@ -89,6 +113,8 @@ public class MainActivity extends BaseActivity
                         this.view.setBackground(resource.getCurrent());
                     }
                 });
+
+
 
     }
 
