@@ -5,10 +5,9 @@ import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.sumx4ever.common.app.BaseFragment;
 import com.sumx4ever.common.app.PresenterFragment;
 import com.sumx4ever.italker.R;
-import com.sumx4ever.italker.activitys.MainActivity;
+import com.sumx4ever.italker.activities.MainActivity;
 import com.sumx4ever.italker.factory.presenter.account.RegisterContract;
 import com.sumx4ever.italker.factory.presenter.account.RegisterPresenter;
 

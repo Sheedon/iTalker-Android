@@ -24,6 +24,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     /**base**/
     implementation rootProject.ext.dependencies.appcompatV7
+    implementation rootProject.ext.dependencies.recyclerview
     /**网络**/
     implementation rootProject.ext.dependencies.retrofit
     implementation rootProject.ext.dependencies.gson
@@ -31,6 +32,7 @@ dependencies {
     /**其他**/
     implementation rootProject.ext.dependencies.aliyunOSS
     implementation rootProject.ext.dependencies.kit_handler
+    implementation rootProject.ext.dependencies.kit_reflect
     implementation rootProject.ext.dependencies.logger
     /**测试**/
     testImplementation rootProject.ext.dependencies.junit

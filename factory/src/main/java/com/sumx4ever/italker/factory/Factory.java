@@ -1,18 +1,33 @@
 package com.sumx4ever.italker.factory;
 
 import android.support.annotation.StringRes;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.raizlabs.android.dbflow.config.FlowConfig;
 import com.raizlabs.android.dbflow.config.FlowManager;
 import com.sumx.factory.R;
 import com.sumx4ever.common.app.Application;
 import com.sumx4ever.factory.data.DataSource;
+import com.sumx4ever.italker.factory.data.group.GroupCenter;
+import com.sumx4ever.italker.factory.data.group.GroupDispatcher;
+import com.sumx4ever.italker.factory.data.message.MessageCenter;
+import com.sumx4ever.italker.factory.data.message.MessageDispatch;
+import com.sumx4ever.italker.factory.data.user.UserCenter;
+import com.sumx4ever.italker.factory.data.user.UserDispatcher;
+import com.sumx4ever.italker.factory.model.api.PushModel;
 import com.sumx4ever.italker.factory.model.api.RspModel;
+import com.sumx4ever.italker.factory.model.card.GroupCard;
+import com.sumx4ever.italker.factory.model.card.GroupMemberCard;
+import com.sumx4ever.italker.factory.model.card.MessageCard;
+import com.sumx4ever.italker.factory.model.card.UserCard;
 import com.sumx4ever.italker.factory.persistence.Account;
 import com.sumx4ever.italker.factory.utils.DBFlowExclusionStrategy;
 
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -21,6 +36,7 @@ import java.util.concurrent.Executors;
  * @version 1.0.0
  */
 public class Factory {
+    private static final String TAG = Factory.class.getSimpleName();
     // 单例模式
     private static final Factory instance;
     // 全局的线程池
@@ -168,9 +184,89 @@ public class Factory {
     /**
      * 处理推送来的消息
      *
-     * @param message 消息
+     * @param str 消息
      */
-    public static void dispatchPush(String message) {
-        // TODO
+    public static void dispatchPush(String str) {
+        if(!Account.isLogin())
+            return;
+
+        PushModel model = PushModel.decode(str);
+        if(model == null)
+            return;
+
+        // 对推送集合进行遍历
+        for (PushModel.Entity entity : model.getEntities()) {
+            Log.i(TAG, "dispatchPush-Entity:" + entity.toString());
+
+            switch (entity.type){
+                case PushModel.ENTITY_TYPE_LOGOUT:
+                    instance.logout();
+                    return;
+                case PushModel.ENTITY_TYPE_MESSAGE: {
+                    // 普通消息
+                    MessageCard card = getGson().fromJson(entity.content, MessageCard.class);
+                    getMessageCenter().dispatch(card);
+                    break;
+                }
+
+                case PushModel.ENTITY_TYPE_ADD_FRIEND: {
+                    // 好友添加
+                    UserCard card = getGson().fromJson(entity.content, UserCard.class);
+                    getUserCenter().dispatch(card);
+                    break;
+                }
+
+                case PushModel.ENTITY_TYPE_ADD_GROUP: {
+                    // 添加群
+                    GroupCard card = getGson().fromJson(entity.content, GroupCard.class);
+                    getGroupCenter().dispatch(card);
+                    break;
+                }
+
+                case PushModel.ENTITY_TYPE_ADD_GROUP_MEMBERS:
+                case PushModel.ENTITY_TYPE_MODIFY_GROUP_MEMBERS: {
+                    // 群成员变更, 回来的是一个群成员的列表
+                    Type type = new TypeToken<List<GroupMemberCard>>() {
+                    }.getType();
+                    List<GroupMemberCard> card = getGson().fromJson(entity.content, type);
+                    // 把数据集合丢到数据中心处理
+                    getGroupCenter().dispatch(card.toArray(new GroupMemberCard[0]));
+                    break;
+                }
+                case PushModel.ENTITY_TYPE_EXIT_GROUP_MEMBERS: {
+                    // TODO 成员退出的推送
+                }
+            }
+        }
+
+    }
+
+    /**
+     * 获取一个用户中心的实现类
+     *
+     * @return 用户中心的规范接口
+     */
+    public static UserCenter getUserCenter(){
+        return UserDispatcher.instance();
+    }
+
+
+    /**
+     * 获取一个消息中心的实现类
+     *
+     * @return 用户中心的规范接口
+     */
+    public static MessageCenter getMessageCenter(){
+        return MessageDispatch.instance();
+    }
+
+
+    /**
+     * 获取一个群处理中心的实现类
+     *
+     * @return 群中心的规范接口
+     */
+    public static GroupCenter getGroupCenter() {
+        return GroupDispatcher.instance();
     }
 }

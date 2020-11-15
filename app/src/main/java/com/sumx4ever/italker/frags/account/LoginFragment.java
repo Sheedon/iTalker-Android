@@ -2,18 +2,12 @@ package com.sumx4ever.italker.frags.account;
 
 
 import android.content.Context;
-import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.sumx4ever.common.app.BaseFragment;
 import com.sumx4ever.common.app.PresenterFragment;
 import com.sumx4ever.italker.R;
-import com.sumx4ever.italker.activitys.MainActivity;
+import com.sumx4ever.italker.activities.MainActivity;
 import com.sumx4ever.italker.factory.presenter.account.LoginContract;
 import com.sumx4ever.italker.factory.presenter.account.LoginPresenter;
 

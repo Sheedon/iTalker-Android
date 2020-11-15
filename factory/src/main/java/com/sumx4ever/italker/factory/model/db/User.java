@@ -4,51 +4,53 @@ import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
+import com.sumx4ever.factory.model.Author;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @author qiujuer Email:qiujuer@live.cn
  * @version 1.0.0
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel {
+public class User extends BaseDbModel<User> implements Author {
     public static final int SEX_MAN = 1;
     public static final int SEX_WOMAN = 2;
 
     // 主键
     @PrimaryKey
-    private String id;
+    public String id;
     @Column
-    private String name;
+    public String name;
     @Column
-    private String phone;
+    public String phone;
     @Column
-    private String portrait;
+    public String portrait;
     @Column
-    private String desc;
+    public String desc;
     @Column
-    private int sex = 0;
+    public int sex = 0;
 
     // 我对某人的备注信息，也应该写入到数据库中
     @Column
-    private String alias;
+    public String alias;
 
     // 用户关注人的数量
     @Column
-    private int follows;
+    public int follows;
 
     // 用户粉丝的数量
     @Column
-    private int following;
+    public int following;
 
     // 我与当前User的关系状态，是否已经关注了这个人
     @Column
-    private boolean isFollow;
+    public boolean isFollow;
 
     // 时间字段
     @Column
-    private Date modifyAt;
+    public Date modifyAt;
 
     public String getId() {
         return id;
@@ -153,5 +155,22 @@ public class User extends BaseModel {
                 ", isFollow=" + isFollow +
                 ", modifyAt=" + modifyAt +
                 '}';
+    }
+
+    @Override
+    public boolean isSame(User old) {
+        // 主要关注Id即可
+        return this == old || Objects.equals(id, old.id);
+    }
+
+    @Override
+    public boolean isUiContentSame(User old) {
+        // 显示的内容是否一样，主要判断 名字，头像，性别，是否已经关注
+        return this == old || (
+                Objects.equals(name, old.name)
+                        && Objects.equals(portrait, old.portrait)
+                        && Objects.equals(sex, old.sex)
+                        && Objects.equals(isFollow, old.isFollow)
+        );
     }
 }

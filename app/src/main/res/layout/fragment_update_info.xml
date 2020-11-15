@@ -16,7 +16,7 @@
         android:paddingTop="@dimen/statusBarSize">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -36,7 +36,7 @@
             android:src="@drawable/default_holder_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
             android:id="@+id/textView"

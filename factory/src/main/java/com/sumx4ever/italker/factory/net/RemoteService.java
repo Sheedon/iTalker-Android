@@ -4,14 +4,24 @@ import com.sumx4ever.italker.factory.model.api.RspModel;
 import com.sumx4ever.italker.factory.model.api.account.AccountRspModel;
 import com.sumx4ever.italker.factory.model.api.account.LoginModel;
 import com.sumx4ever.italker.factory.model.api.account.RegisterModel;
+import com.sumx4ever.italker.factory.model.api.group.GroupCreateModel;
+import com.sumx4ever.italker.factory.model.api.group.GroupMemberAddModel;
+import com.sumx4ever.italker.factory.model.api.message.MsgCreateModel;
 import com.sumx4ever.italker.factory.model.api.user.UserUpdateModel;
+import com.sumx4ever.italker.factory.model.card.GroupCard;
+import com.sumx4ever.italker.factory.model.card.GroupMemberCard;
+import com.sumx4ever.italker.factory.model.card.MessageCard;
 import com.sumx4ever.italker.factory.model.card.UserCard;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Url;
 
 /**
  * 网络请求的所有的接口
@@ -48,6 +58,9 @@ public interface RemoteService {
     @POST("account/bind/{pushId}")
     Call<RspModel<AccountRspModel>> accountBind(@Path(encoded = true, value = "pushId") String pushId);
 
+    @POST()
+    Call<RspModel<AccountRspModel>> accountBind1(@Url String url,
+                                                 @Path(encoded = true, value = "pushId") String pushId);
     /**
      * 用户更新接口
      *
@@ -56,4 +69,50 @@ public interface RemoteService {
      */
     @PUT("user")
     Call<RspModel<UserCard>> userUpdate(@Body UserUpdateModel model);
+
+    // 用户搜索接口
+    @GET("user/search/{name}")
+    Call<RspModel<List<UserCard>>> userSearch(@Path("name") String name);
+
+    // 用户关注接口
+    @PUT("user/follow/{userId}")
+    Call<RspModel<UserCard>> userFollow(@Path("userId") String userId);
+
+    // 获取联系人列表
+    @GET("user/contacts")
+    Call<RspModel<List<UserCard>>> userContacts();
+
+
+    // 查询某人的信息
+    @GET("user/{userId}")
+    Call<RspModel<UserCard>> userFind(@Path("userId") String userId);
+
+    // 发送消息的接口
+    @POST("msg")
+    Call<RspModel<MessageCard>> msgPush(@Body MsgCreateModel model);
+
+    // 创建群
+    @POST("group")
+    Call<RspModel<GroupCard>> groupCreate(@Body GroupCreateModel model);
+
+    // 拉取群信息
+    @POST("group/{groupId}")
+    Call<RspModel<GroupCard>> groupFind(@Path("groupId") String groupId);
+
+    // 群搜索的接口
+    @GET("group/search/{name}")
+    Call<RspModel<List<GroupCard>>> groupSearch(@Path(value = "name", encoded = true) String name);
+
+    // 我的群列表
+    @GET("group/list/{date}")
+    Call<RspModel<List<GroupCard>>> groups(@Path(value = "date", encoded = true) String date);
+
+    // 我的群的成员列表
+    @GET("group/{groupId}/member")
+    Call<RspModel<List<GroupMemberCard>>> groupMembers(@Path("groupId") String groupId);
+
+    // 给群添加成员
+    @POST("group/{groupId}/member")
+    Call<RspModel<List<GroupMemberCard>>> groupMemberAdd(@Path("groupId") String groupId,
+                                                         @Body GroupMemberAddModel model);
 }

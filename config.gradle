@@ -47,99 +47,104 @@ ext {
             fragmentation          : "1.1.10",
             easyPMVersion          : "1.2.0",
             ossVersion             : "+",
-            getuiVersion           : "2.12.3.0",
+            getuiVersion           : "2.13.1.0",
 
             //DBFlow数据库
-            dbflowVersion         : "4.2.4",
+            dbflowVersion          : "4.2.4",
     ]
 
     dependencies = [
             // support
-            supportV4                  : "com.android.support:support-v4:${dependVersion.support}",
-            appcompatV7                : "com.android.support:appcompat-v7:${dependVersion.support}",
-            constraint                 : "com.android.support.constraint:constraint-layout:${dependVersion.constraint}",
-            recyclerview               : "com.android.support:recyclerview-v7:${dependVersion.support}",
+            supportV4              : "com.android.support:support-v4:${dependVersion.support}",
+            appcompatV7            : "com.android.support:appcompat-v7:${dependVersion.support}",
+            constraint             : "com.android.support.constraint:constraint-layout:${dependVersion.constraint}",
+            recyclerview           : "com.android.support:recyclerview-v7:${dependVersion.support}",
             //规范的MD设计风格的控件
-            design                     : "com.android.support:design:${dependVersion.support}",
+            design                 : "com.android.support:design:${dependVersion.support}",
             //注解类型
-            annotations                : "com.android.support:support-annotations:${dependVersion.support}",
+            annotations            : "com.android.support:support-annotations:${dependVersion.support}",
 
             //network 网络模块
             //retrofit
-            retrofit                   : "com.squareup.retrofit2:retrofit:${dependVersion.retrofit}",
+            retrofit               : "com.squareup.retrofit2:retrofit:${dependVersion.retrofit}",
             //retrofit依赖Gson
-            gson                       : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofit}",
+            gson                   : "com.squareup.retrofit2:converter-gson:${dependVersion.retrofit}",
             // google gson
-            googleGson                 : "com.google.code.gson:gson:${dependVersion.gson}",
+            googleGson             : "com.google.code.gson:gson:${dependVersion.gson}",
             //retrofit依赖RxJava
-            readapter                  : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofit}",
+            readapter              : "com.squareup.retrofit2:adapter-rxjava2:${dependVersion.retrofit}",
             //OkHttp
-            okhttp                     : "com.squareup.okhttp3:okhttp:${dependVersion.okhttp}",
+            okhttp                 : "com.squareup.okhttp3:okhttp:${dependVersion.okhttp}",
             //rxjava2
-            rxjava                     : "io.reactivex.rxjava2:rxjava:${dependVersion.rxjava}",
-            rxandroid                  : "io.reactivex.rxjava2:rxandroid:${dependVersion.rxandroid}",
+            rxjava                 : "io.reactivex.rxjava2:rxjava:${dependVersion.rxjava}",
+            rxandroid              : "io.reactivex.rxjava2:rxandroid:${dependVersion.rxandroid}",
 
             //测试
             //junit:by testCompile
-            junit                      : "junit:junit:${dependVersion.junit}",
+            junit                  : "junit:junit:${dependVersion.junit}",
             //espresso:by androidTestCompile
-            espresso                   : "com.android.support.test.espresso:espresso-core:${dependVersion.espresso}",
+            espresso               : "com.android.support.test.espresso:espresso-core:${dependVersion.espresso}",
             //Android 内存泄漏分析 by debugCompile
-            leakcanary                 : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
+            leakcanary             : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
             //by releaseCompile
-            leakcanary_no_op           : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
-            runner                     : "com.android.support.test:runner:${dependVersion.runner}",
+            leakcanary_no_op       : "com.squareup.leakcanary:leakcanary-android:${dependVersion.leakcanary}",
+            runner                 : "com.android.support.test:runner:${dependVersion.runner}",
 
             //UI界面相关
             //glide:by implementation
-            glide                      : "com.github.bumptech.glide:glide:${dependVersion.glide}",
+            glide                  : "com.github.bumptech.glide:glide:${dependVersion.glide}",
             //compiler:by annotationProcessor
-            glideCompiler              : "com.github.bumptech.glide:compiler:${dependVersion.glide}",
+            glideCompiler          : "com.github.bumptech.glide:compiler:${dependVersion.glide}",
             //BaseRecyclerViewAdapter
-            baseRecyclerViewAdapter    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:${dependVersion.baseRecyclerViewAdapter}",
+            baseRecyclerViewAdapter: "com.github.CymChad:BaseRecyclerViewAdapterHelper:${dependVersion.baseRecyclerViewAdapter}",
             //PhotoView 是一款扩展自Android ImageView，支持通过单点/多点触摸来进行图片缩放的智能控件。
-            photoView                  : "com.github.chrisbanes:PhotoView:${dependVersion.photoView}",
+            photoView              : "com.github.chrisbanes:PhotoView:${dependVersion.photoView}",
             //日期选择部件(Google Agenda 的样式风格)
-            datetimepicker             : "com.github.flavienlaurent.datetimepicker:library:${dependVersion.datetimepicker}",
+            datetimepicker         : "com.github.flavienlaurent.datetimepicker:library:${dependVersion.datetimepicker}",
             //仿iOS的PickerView控件，有时间选择器和选项选择器
-            pickerview                 : "com.contrarywind:Android-PickerView:${dependVersion.pickerview}",
+            pickerview             : "com.contrarywind:Android-PickerView:${dependVersion.pickerview}",
             //广告栏控件
-            convenientbanner           : "com.bigkoo:convenientbanner:${dependVersion.convenientbanner}",
+            convenientbanner       : "com.bigkoo:convenientbanner:${dependVersion.convenientbanner}",
             //YoKey大神的Fragment库Fragmentation，主要用于现在App经常需要实现的单Activity+多Fragment以及多Activity+多Fragment的形式架构。
-            fragmentation              : "me.yokeyword:fragmentation:${dependVersion.fragmentation}",
+            fragmentation          : "me.yokeyword:fragmentation:${dependVersion.fragmentation}",
             //qiujuer 的ui控件
-            geniusUi                   : "net.qiujuer.genius:ui:${dependVersion.geniusVersion}",
+            geniusUi               : "net.qiujuer.genius:ui:${dependVersion.geniusVersion}",
             //qiujuer 的资源包
-            geniusRes                  : "net.qiujuer.genius:res:${dependVersion.geniusVersion}",
+            geniusRes              : "net.qiujuer.genius:res:${dependVersion.geniusVersion}",
             //圆形图
-            circleimageview            : "de.hdodenhof:circleimageview:${dependVersion.circleimageview}",
+            circleimageview        : "de.hdodenhof:circleimageview:${dependVersion.circleimageview}",
             //图片裁剪
-            ucrop                      : "com.github.yalantis:ucrop:${dependVersion.ucrop}",
+            ucrop                  : "com.github.yalantis:ucrop:${dependVersion.ucrop}",
+            //空气面板
+            airpanel               : "net.qiujuer.widget:airpanel:1.1.0",
+            // Lame 录音 MP3 转码器
+            lame                   : "net.qiujuer.lame:lame:1.0.0",
 
             //other
             //butterknife
-            butterknife                : "com.jakewharton:butterknife:${dependVersion.butterknife}",
+            butterknife            : "com.jakewharton:butterknife:${dependVersion.butterknife}",
             //by annotationProcessor
-            butterknifeCompiler        : "com.jakewharton:butterknife-compiler:${dependVersion.butterknife}",
-            eventBus                   : "org.greenrobot:eventbus:${dependVersion.eventBus}",
+            butterknifeCompiler    : "com.jakewharton:butterknife-compiler:${dependVersion.butterknife}",
+            eventBus               : "org.greenrobot:eventbus:${dependVersion.eventBus}",
             //清晰的Log输出
-            logger                     : "com.orhanobut:logger:${dependVersion.logger}",
+            logger                 : "com.orhanobut:logger:${dependVersion.logger}",
             //权限申请
-            easypermissions            : "pub.devrel:easypermissions:${dependVersion.easyPMVersion}",
-            kit_handler                : "net.qiujuer.genius:kit-handler:${dependVersion.geniusVersion}",
+            easypermissions        : "pub.devrel:easypermissions:${dependVersion.easyPMVersion}",
+            kit_handler            : "net.qiujuer.genius:kit-handler:${dependVersion.geniusVersion}",
+            kit_reflect            : "net.qiujuer.genius:kit-reflect:${dependVersion.geniusVersion}",
             //阿里云OSS
-            aliyunOSS                  : "com.aliyun.dpa:oss-android-sdk:${dependVersion.ossVersion}",
+            aliyunOSS              : "com.aliyun.dpa:oss-android-sdk:${dependVersion.ossVersion}",
             //个推
-            getui                      : "com.getui:sdk:${dependVersion.getuiVersion}",
+            getui                  : "com.getui:sdk:${dependVersion.getuiVersion}",
 
             //DBFlow数据库
             // annotationProcessor if Java use this. If using Kotlin do NOT use this.
-            dbflow_processor_Java      : "com.github.Raizlabs.DBFlow:dbflow-processor:${dependVersion.dbflowVersion}",
+            dbflow_processor_Java  : "com.github.Raizlabs.DBFlow:dbflow-processor:${dependVersion.dbflowVersion}",
             // kapt Use if Kotlin user.
-            dbflow_processor_Kotlin    : "com.github.Raizlabs.DBFlow:dbflow-processor:${dependVersion.dbflowVersion}",
+            dbflow_processor_Kotlin: "com.github.Raizlabs.DBFlow:dbflow-processor:${dependVersion.dbflowVersion}",
             // 必须项
-            dbflow_core                : "com.github.Raizlabs.DBFlow:dbflow-core:${dependVersion.dbflowVersion}",
-            dbflow                     : "com.github.Raizlabs.DBFlow:dbflow:${dependVersion.dbflowVersion}",
+            dbflow_core            : "com.github.Raizlabs.DBFlow:dbflow-core:${dependVersion.dbflowVersion}",
+            dbflow                 : "com.github.Raizlabs.DBFlow:dbflow:${dependVersion.dbflowVersion}",
     ]
 
 }

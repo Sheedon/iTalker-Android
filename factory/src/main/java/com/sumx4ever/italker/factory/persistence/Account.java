@@ -18,7 +18,6 @@ import java.sql.SQLData;
  * @version 1.0.0
  */
 public class Account {
-
     private static final String KEY_PUSH_ID = "KEY_PUSH_ID";
     private static final String KEY_IS_BIND = "KEY_IS_BIND";
     private static final String KEY_TOKEN = "KEY_TOKEN";
@@ -152,10 +151,19 @@ public class Account {
      */
     public static User getUser() {
         // 如果为null返回一个new的User，其次从数据库查询
-        return TextUtils.isEmpty(userId)?new User(): SQLite.select()
+        return TextUtils.isEmpty(userId) ? new User() : SQLite.select()
                 .from(User.class)
                 .where(User_Table.id.eq(userId))
                 .querySingle();
+    }
+
+    /**
+     * 返回用户Id
+     *
+     * @return 用户Id
+     */
+    public static String getUserId() {
+        return getUser().getId();
     }
 
     /**

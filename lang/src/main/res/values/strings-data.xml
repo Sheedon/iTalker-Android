@@ -22,7 +22,7 @@
     <string name="data_rsp_error_parameters_exist_account">已有该账户! ★~★</string>
     <string name="data_rsp_error_parameters_exist_name">已有该用户名! ★~★</string>
     <string name="data_rsp_error_account_token">重新登录 ..@_@|||||..</string>
-    <string name="data_rsp_error_account_login">账号或密码错误 §^_^§</string>
+    <string name="data_rsp_error_account_login">登录失败，是那里没搞定么? §^_^§</string>
     <string name="data_rsp_error_account_register">抱歉，注册失败!  ^_^|||</string>
     <string name="data_rsp_error_account_no_permission">您越权啦!!!</string>
 

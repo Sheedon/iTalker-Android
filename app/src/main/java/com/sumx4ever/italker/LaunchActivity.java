@@ -6,22 +6,22 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Property;
 import android.view.View;
 
-import com.sumx4ever.common.app.BaseActivity;
-import com.sumx4ever.italker.activitys.AccountActivity;
-import com.sumx4ever.italker.activitys.MainActivity;
+import com.igexin.sdk.PushManager;
+import com.sumx4ever.common.app.Activity;
+import com.sumx4ever.italker.activities.AccountActivity;
+import com.sumx4ever.italker.activities.MainActivity;
 import com.sumx4ever.italker.factory.persistence.Account;
 import com.sumx4ever.italker.frags.assist.PermissionsFragment;
+import com.sumx4ever.italker.services.IntentService;
 
 import net.qiujuer.genius.res.Resource;
 import net.qiujuer.genius.ui.compat.UiCompat;
 
-public class LaunchActivity extends BaseActivity {
+public class LaunchActivity extends Activity implements PermissionsFragment.AccessRequestCallback {
     // Drawable
     private ColorDrawable mBgDrawable;
 
@@ -47,7 +47,6 @@ public class LaunchActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-
         // 动画进入到50%等待PushId获取到
         startAnim(0.5f, new Runnable() {
             @Override
@@ -72,7 +71,7 @@ public class LaunchActivity extends BaseActivity {
         } else {
             // 没有登录
             // 如果拿到了PushId, 没有登录是不能绑定PushId的
-            if (!TextUtils.isEmpty(Account.getPushId())) {
+            if (TextUtils.isEmpty(Account.getPushId())) {
                 // 跳转
                 skip();
                 return;
@@ -80,13 +79,12 @@ public class LaunchActivity extends BaseActivity {
         }
 
         // 循环等待
-        getWindow().getDecorView()
-                .postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        waitPushReceiverId();
-                    }
-                }, 500);
+        getWindow().getDecorView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                waitPushReceiverId();
+            }
+        }, 500);
     }
 
     /**
@@ -106,7 +104,7 @@ public class LaunchActivity extends BaseActivity {
      */
     private void reallySkip() {
         // 权限检测，跳转
-        if (PermissionsFragment.haveAll(this, getSupportFragmentManager())) {
+        if (PermissionsFragment.haveAll(this, getSupportFragmentManager(),this)) {
             // 检查跳转到主页还是登录
             if (Account.isLogin()) {
                 MainActivity.show(this);
@@ -156,4 +154,12 @@ public class LaunchActivity extends BaseActivity {
             return object.mBgDrawable.getColor();
         }
     };
+
+    /**
+     * 授予权限成功返回处理登陆
+     */
+    @Override
+    public void onAccessRequestSuccess() {
+        reallySkip();
+    }
 }

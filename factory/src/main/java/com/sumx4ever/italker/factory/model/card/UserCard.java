@@ -1,14 +1,17 @@
 package com.sumx4ever.italker.factory.model.card;
 
+import com.sumx4ever.factory.model.Author;
 import com.sumx4ever.italker.factory.model.db.User;
 
 import java.util.Date;
 
 /**
+ * 用户卡片，用于接收服务器返回
+ *
  * @author Sumx https://github.com/Sumx4ever
  * @createDate 2018/6/27
  */
-public class UserCard {
+public class UserCard implements Author{
     private String id;
     private String name;
     private String phone;
@@ -109,7 +112,7 @@ public class UserCard {
     }
 
     // 缓存一个对应的User, 不能被GSON框架解析使用
-    private User user;
+    private transient User user;
 
     public User build() {
         if (user == null) {

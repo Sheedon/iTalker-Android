@@ -31,6 +31,12 @@ public class PermissionsFragment extends BottomSheetDialogFragment
     // 权限回调的标示
     private static final int RC = 0x0100;
 
+    private static AccessRequestCallback mCallback;
+
+    public void setCallback(AccessRequestCallback mCallback) {
+        this.mCallback = mCallback;
+    }
+
     public PermissionsFragment() {
         // Required empty public constructor
     }
@@ -171,7 +177,8 @@ public class PermissionsFragment extends BottomSheetDialogFragment
      * @param manager FragmentManager
      * @return 是否有权限
      */
-    public static boolean haveAll(Context context, FragmentManager manager) {
+    public static boolean haveAll(Context context, FragmentManager manager,AccessRequestCallback callback) {
+        mCallback = callback;
         // 检查是否具有所有的权限
         boolean haveAll = haveNetworkPerm(context)
                 && haveReadPerm(context)
@@ -205,6 +212,8 @@ public class PermissionsFragment extends BottomSheetDialogFragment
             Application.showToast(R.string.label_permission_ok);
             // Fragment 中调用getView得到跟布局，前提是在onCreateView方法之后
             refreshState(getView());
+            if(mCallback != null)
+                mCallback.onAccessRequestSuccess();
         } else {
             EasyPermissions.requestPermissions(this, getString(R.string.title_assist_permissions),
                     RC, perms);
@@ -232,9 +241,16 @@ public class PermissionsFragment extends BottomSheetDialogFragment
      * 权限申请的时候回调的方法，在这个方法中把对应的权限申请状态交给EasyPermissions框架
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // 传递对应的参数，并且告知接收权限的处理者是我自己
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    // 权限申请成功反馈
+    public interface AccessRequestCallback {
+        // 权限申请成功反馈
+        void onAccessRequestSuccess();
     }
 }

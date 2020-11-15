@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/factory/factory.iml" filepath="$PROJECT_DIR$/factory/factory.iml" />
-      <module fileurl="file://$PROJECT_DIR$/iTalker-Android.iml" filepath="$PROJECT_DIR$/iTalker-Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lang/lang.iml" filepath="$PROJECT_DIR$/lang/lang.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="iTalker-Android/app" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" group="iTalker-Android/common" />
+      <module fileurl="file://$PROJECT_DIR$/face-res/face-res.iml" filepath="$PROJECT_DIR$/face-res/face-res.iml" group="iTalker-Android/face-res" />
+      <module fileurl="file://$PROJECT_DIR$/factory/factory.iml" filepath="$PROJECT_DIR$/factory/factory.iml" group="iTalker-Android/factory" />
+      <module fileurl="file://$PROJECT_DIR$/iTalker-Android.iml" filepath="$PROJECT_DIR$/iTalker-Android.iml" group="iTalker-Android" />
+      <module fileurl="file://$PROJECT_DIR$/lang/lang.iml" filepath="$PROJECT_DIR$/lang/lang.iml" group="iTalker-Android/lang" />
     </modules>
   </component>
 </project>

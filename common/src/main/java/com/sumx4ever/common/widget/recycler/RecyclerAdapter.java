@@ -1,5 +1,6 @@
 package com.sumx4ever.common.widget.recycler;
 
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,6 @@ import butterknife.Unbinder;
 public abstract class RecyclerAdapter<Data>
         extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder<Data>>
         implements View.OnClickListener, View.OnLongClickListener, AdapterCallback<Data> {
-
     private final List<Data> mDataList;
     private AdapterListener<Data> mListener;
 
@@ -60,25 +60,27 @@ public abstract class RecyclerAdapter<Data>
      * @param data     当前的数据
      * @return XML文件的ID，用于创建ViewHolder
      */
+    @LayoutRes
     protected abstract int getItemViewType(int position, Data data);
 
     /**
      * 创建一个ViewHolder
      *
      * @param parent   RecyclerView
-     * @param viewType 界面的类型
-     * @return
+     * @param viewType 界面的类型,约定为XML布局的Id
+     * @return ViewHolder
      */
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder<Data> onCreateViewHolder(ViewGroup parent, int viewType) {
         // 得到LayoutInflater用于把XML初始化为View
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        // 把XML id为viewType的文件初始化为一个root view
+        // 把XML id为viewType的文件初始化为一个root View
         View root = inflater.inflate(viewType, parent, false);
         // 通过子类必须实现的方法，得到一个ViewHolder
         ViewHolder<Data> holder = onCreateViewHolder(root, viewType);
 
-        // 设置View的Tag为ViewHolder,进行双向绑定
+
+        // 设置View的Tag为ViewHolder，进行双向绑定
         root.setTag(R.id.tag_recycler_holder, holder);
         // 设置事件点击
         root.setOnClickListener(this);
@@ -96,8 +98,8 @@ public abstract class RecyclerAdapter<Data>
      * 得到一个新的ViewHolder
      *
      * @param root     根布局
-     * @param viewType 布局类型，就是XML的ID
-     * @return
+     * @param viewType 布局类型，其实就是XML的ID
+     * @return ViewHolder
      */
     protected abstract ViewHolder<Data> onCreateViewHolder(View root, int viewType);
 
@@ -105,7 +107,7 @@ public abstract class RecyclerAdapter<Data>
      * 绑定数据到一个Holder上
      *
      * @param holder   ViewHolder
-     * @param position 数据坐标
+     * @param position 坐标
      */
     @Override
     public void onBindViewHolder(ViewHolder<Data> holder, int position) {
@@ -117,8 +119,6 @@ public abstract class RecyclerAdapter<Data>
 
     /**
      * 得到当前集合的数据量
-     *
-     * @return
      */
     @Override
     public int getItemCount() {
@@ -126,9 +126,18 @@ public abstract class RecyclerAdapter<Data>
     }
 
     /**
+     * 返回整个集合
+     *
+     * @return List<Data>
+     */
+    public List<Data> getItems() {
+        return mDataList;
+    }
+
+    /**
      * 插入一条数据并通知插入
      *
-     * @param data
+     * @param data Data
      */
     public void add(Data data) {
         mDataList.add(data);
@@ -161,6 +170,27 @@ public abstract class RecyclerAdapter<Data>
         }
     }
 
+    /**
+     * 删除操作
+     */
+    public void clear() {
+        mDataList.clear();
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 替换为一个新的集合，其中包括了清空
+     *
+     * @param dataList 一个新的集合
+     */
+    public void replace(Collection<Data> dataList) {
+        mDataList.clear();
+        if (dataList == null || dataList.size() == 0)
+            return;
+        mDataList.addAll(dataList);
+        notifyDataSetChanged();
+    }
+
     @Override
     public void update(Data data, ViewHolder<Data> holder) {
         // 得到当前ViewHolder的坐标
@@ -174,34 +204,13 @@ public abstract class RecyclerAdapter<Data>
         }
     }
 
-    /**
-     * 删除操作
-     */
-    public void clear() {
-        mDataList.clear();
-        notifyDataSetChanged();
-    }
-
-    /**
-     * 替换成一个新的集合，其中包括了清空
-     *
-     * @param dataList 一个新的集合
-     */
-    public void replace(Collection<Data> dataList) {
-        mDataList.clear();
-        if (dataList != null && dataList.size() > 0) {
-            mDataList.addAll(dataList);
-        }
-        notifyDataSetChanged();
-    }
-
     @Override
     public void onClick(View v) {
         ViewHolder viewHolder = (ViewHolder) v.getTag(R.id.tag_recycler_holder);
         if (this.mListener != null) {
             // 得到ViewHolder当前对应的适配器中的坐标
             int pos = viewHolder.getAdapterPosition();
-            // 回调方法
+            // 回掉方法
             this.mListener.onItemClick(viewHolder, mDataList.get(pos));
         }
 
@@ -213,7 +222,7 @@ public abstract class RecyclerAdapter<Data>
         if (this.mListener != null) {
             // 得到ViewHolder当前对应的适配器中的坐标
             int pos = viewHolder.getAdapterPosition();
-            // 回调方法
+            // 回掉方法
             this.mListener.onItemLongClick(viewHolder, mDataList.get(pos));
             return true;
         }
@@ -221,24 +230,24 @@ public abstract class RecyclerAdapter<Data>
     }
 
     /**
-     * 设置适配器监听
+     * 设置适配器的监听
      *
-     * @param listener
+     * @param adapterListener AdapterListener
      */
-    public void setListener(AdapterListener<Data> listener) {
-        this.mListener = listener;
+    public void setListener(AdapterListener<Data> adapterListener) {
+        this.mListener = adapterListener;
     }
 
     /**
      * 我们的自定义监听器
      *
-     * @param <Data>
+     * @param <Data> 范型
      */
     public interface AdapterListener<Data> {
-        //当Cell点击的时候触发
+        // 当Cell点击的时候触发
         void onItemClick(RecyclerAdapter.ViewHolder holder, Data data);
 
-        //当cell长按时触发
+        // 当Cell长按时触发
         void onItemLongClick(RecyclerAdapter.ViewHolder holder, Data data);
     }
 
@@ -257,7 +266,7 @@ public abstract class RecyclerAdapter<Data>
         }
 
         /**
-         * 用于绑定的数据数据的触发
+         * 用于绑定数据的触发
          *
          * @param data 绑定的数据
          */
@@ -267,14 +276,14 @@ public abstract class RecyclerAdapter<Data>
         }
 
         /**
-         * 当触发绑定数据的时候回调，必须复写。
+         * 当触发绑定数据的时候，的回掉；必须复写
          *
          * @param data 绑定的数据
          */
         protected abstract void onBind(Data data);
 
         /**
-         * Holder 自己对自己对应的Data进行更新操作
+         * Holder自己对自己对应的Data进行更新操作
          *
          * @param data Data数据
          */
@@ -283,7 +292,6 @@ public abstract class RecyclerAdapter<Data>
                 this.callback.update(data, this);
             }
         }
-
     }
 
     /**
@@ -291,7 +299,8 @@ public abstract class RecyclerAdapter<Data>
      *
      * @param <Data>
      */
-    public static abstract class AdapterListenerImpl<Data> implements AdapterListener<Data>{
+    public static abstract class AdapterListenerImpl<Data> implements AdapterListener<Data> {
+
         @Override
         public void onItemClick(ViewHolder holder, Data data) {
 

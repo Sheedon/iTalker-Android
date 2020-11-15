@@ -16,7 +16,7 @@
     <!-- 录音权限 -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-    <!-- iBeancon功能所需权限 -->;
+    <!-- iBeancon功能所需权限 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- 个推3.0电子围栏功能所需权限 -->
@@ -30,7 +30,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <!-- 个推网络注册 -->
+
         <activity
             android:name=".LaunchActivity"
             android:label="@string/app_name"
@@ -42,32 +46,60 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.MainActivity"
+            android:name=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Main" />
         <activity
-            android:name=".activitys.AccountActivity"
+            android:name=".activities.AccountActivity"
             android:theme="@style/AppTheme.Account" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activitys.UserActivity"
+            android:name=".activities.UserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Account" />
+        <activity
+            android:name=".activities.SearchActivity"
+            android:label="@string/title_search"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
+        <activity
+            android:name=".activities.MessageActivity"
+            android:label="@string/title_activity_message"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/AppTheme.Message" />
+        <activity
+            android:name=".activities.PersonalActivity"
+            android:label="@string/title_activity_personal"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
+        <activity
+            android:name=".activities.GroupCreateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Group.Create" />
+        <activity
+            android:name=".activities.GroupMemberActivity"
+            android:label="@string/title_member_list"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
 
 
-        <!--个推网络注册-->
-        <receiver
-            android:name=".MessageReceiver"
-            android:enabled="true"
+        <!-- 用户自定义服务继承自GTIntentService,作为SDK与APP桥梁服务,用来接收各种消息和命令回复 -->
+        <service
+            android:name=".services.IntentService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <!-- 配置SDK核心服务 -->
+        <!-- process必须指定为":pushservice"，切勿随意更改 -->
+        <service
+            android:name=".services.TalkerPushService"
             android:exported="true"
-            android:permission="1000">
-            <intent-filter>
-                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}" />
-            </intent-filter>
-        </receiver>
+            android:label="PushService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":pushservice" />
     </application>
 
 </manifest>

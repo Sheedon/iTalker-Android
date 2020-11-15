@@ -7,7 +7,6 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Window;
 
-import com.sumx4ever.common.app.BaseActivity;
 
 /**
  * @author xudongsun on 2018/1/18.
